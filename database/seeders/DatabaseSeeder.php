@@ -176,7 +176,7 @@ php artisan piket:check-redemption-expiry
 
 Project ini dirilis di bawah lisensi [MIT License](LICENSE).
 MARKDOWN,
-            'image' => null,
+            'image' => 'projects/5nFm2KvMW0MndVVsXSd6M0DsG9OHwKyVyd9GdlTs.png',
             'tech_stack' => 'Laravel 13, PHP 8.3, Livewire 3, MySQL',
             'collaboration_type' => 'team',
             'github_url' => null,
