@@ -16,14 +16,14 @@ class SettingController extends Controller
     public function index(): View
     {
         $settings = [
-            'preloader_text'    => Setting::get('preloader_text', 'WELCOME TO MY PORTFOLIO'),
-            'hero_status_badge' => Setting::get('hero_status_badge', 'Open to work'),
+            'preloader_text'    => Setting::get('preloader_text', 'INFORMATION SYSTEMS & WEB DEV'),
+            'hero_status_badge' => Setting::get('hero_status_badge', 'IS Student & Web Developer'),
             'hero_sub_badge'    => Setting::get('hero_sub_badge', 'Building & learning in public'),
-            'hero_headline_1'   => Setting::get('hero_headline_1', 'Full-Stack'),
-            'hero_headline_2'   => Setting::get('hero_headline_2', 'Developer'),
-            'hero_headline_3'   => Setting::get('hero_headline_3', '& DevLog'),
-            'hero_bio'          => Setting::get('hero_bio', 'Building performant web applications using Laravel, Tailwind CSS, and Alpine.js. Documenting every step of the journey here.'),
-            'hero_email'        => Setting::get('hero_email', 'hello@example.com'),
+            'hero_headline_1'   => Setting::get('hero_headline_1', 'INFORMATION'),
+            'hero_headline_2'   => Setting::get('hero_headline_2', 'SYSTEMS'),
+            'hero_headline_3'   => Setting::get('hero_headline_3', '& DEVLOG'),
+            'hero_bio'          => Setting::get('hero_bio', 'Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi web modern (Laravel, Livewire, Tailwind CSS) dan manajemen basis data. Mendokumentasikan setiap proses belajar di sini.'),
+            'hero_email'        => Setting::get('hero_email', 'isnaini@gmail.com'),
         ];
 
         return view('admin.settings.index', compact('settings'));

@@ -31,7 +31,7 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                     </span>
-                    {{ $settings['hero_status_badge'] ?? 'Open to work' }}
+                    {{ $settings['hero_status_badge'] ?? 'IS Student & Web Developer' }}
                 </div>
                 <div class="hidden sm:flex items-center gap-2 text-zinc-500 text-xs font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
@@ -46,7 +46,7 @@
                 {{-- Line 1: left aligned --}}
                 <div class="overflow-hidden mb-[-0.08em]">
                     <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] text-zinc-100 uppercase select-none">
-                        {{ $settings['hero_headline_1'] ?? 'Full-Stack' }}
+                        {{ $settings['hero_headline_1'] ?? 'INFORMATION' }}
                     </p>
                 </div>
 
@@ -54,14 +54,14 @@
                 <div class="overflow-hidden mb-[-0.04em]">
                     <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right"
                        style="background: linear-gradient(135deg, #e4e4e7 0%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                        {{ $settings['hero_headline_2'] ?? 'Developer' }}
+                        {{ $settings['hero_headline_2'] ?? 'SYSTEMS' }}
                     </p>
                 </div>
 
                 {{-- Line 3: right aligned gradient --}}
                 <div class="overflow-hidden">
                     <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right gradient-text">
-                        {{ $settings['hero_headline_3'] ?? '& DevLog' }}
+                        {{ $settings['hero_headline_3'] ?? '& DEVLOG' }}
                     </p>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 {{-- Left column: bio text + social links --}}
                 <div class="space-y-6" id="hero-bio">
                     <p class="text-zinc-400 text-base leading-relaxed max-w-sm">
-                        {{ $settings['hero_bio'] ?? 'Building performant web applications using Laravel, Tailwind CSS, and Alpine.js. Documenting every step of the journey here.' }}
+                        {{ $settings['hero_bio'] ?? 'Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi web modern (Laravel, Livewire, Tailwind CSS) dan manajemen basis data. Mendokumentasikan setiap proses belajar di sini.' }}
                     </p>
 
                     {{-- Social icons row --}}

@@ -235,13 +235,13 @@ MARKDOWN,
         ]);
 
         // Default Hero & Site Settings
-        \App\Models\Setting::set('preloader_text', 'WELCOME TO MY PORTFOLIO');
-        \App\Models\Setting::set('hero_status_badge', 'Open to work');
+        \App\Models\Setting::set('preloader_text', 'INFORMATION SYSTEMS & WEB DEV');
+        \App\Models\Setting::set('hero_status_badge', 'IS Student & Web Developer');
         \App\Models\Setting::set('hero_sub_badge', 'Building & learning in public');
-        \App\Models\Setting::set('hero_headline_1', 'Full-Stack');
-        \App\Models\Setting::set('hero_headline_2', 'Developer');
-        \App\Models\Setting::set('hero_headline_3', '& DevLog');
-        \App\Models\Setting::set('hero_bio', 'Building performant web applications using Laravel, Tailwind CSS, and Alpine.js. Documenting every step of the journey here.');
-        \App\Models\Setting::set('hero_email', 'hello@example.com');
+        \App\Models\Setting::set('hero_headline_1', 'INFORMATION');
+        \App\Models\Setting::set('hero_headline_2', 'SYSTEMS');
+        \App\Models\Setting::set('hero_headline_3', '& DEVLOG');
+        \App\Models\Setting::set('hero_bio', 'Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi web modern (Laravel, Livewire, Tailwind CSS) dan manajemen basis data. Mendokumentasikan setiap proses belajar di sini.');
+        \App\Models\Setting::set('hero_email', 'isnaini@gmail.com');
     }
 }
