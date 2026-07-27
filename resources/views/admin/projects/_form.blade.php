@@ -44,18 +44,46 @@
 
     {{-- Category --}}
     <div style="{{ $groupStyle }}">
-        <label for="category_id" style="{{ $labelStyle }}">Category <span style="color:#f87171;">*</span></label>
-        <select id="category_id" name="category_id" class="admin-input"
-                style="{{ $inputStyle }} {{ $errors->has('category_id') ? 'border-color:#f87171;' : '' }}"
-                required>
-            <option value="">-- Select category --</option>
+        <label style="{{ $labelStyle }}">Category <span style="color:#f87171;">*</span></label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
             @foreach($categories as $category)
-                <option value="{{ $category->id }}" {{ $old('category_id', $project?->category_id) == $category->id ? 'selected' : '' }}>
-                    {{ $category->name }}
-                </option>
+                <label style="cursor:pointer;">
+                    <input type="radio" name="category_id" value="{{ $category->id }}"
+                           {{ $old('category_id', $project?->category_id) == $category->id ? 'checked' : '' }}
+                           class="peer" style="display:none;" required>
+                    <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-indigo-500 peer-checked:bg-indigo-600/20 peer-checked:text-indigo-300 transition-colors">
+                        {{ $category->name }}
+                    </div>
+                </label>
             @endforeach
-        </select>
+        </div>
         @error('category_id') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+    </div>
+
+    {{-- Project Type --}}
+    <div style="{{ $groupStyle }}">
+        <label style="{{ $labelStyle }}">Project Type <span style="color:#f87171;">*</span></label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <label style="cursor:pointer;">
+                <input type="radio" name="collaboration_type" value="solo"
+                       {{ $old('collaboration_type', $project?->collaboration_type ?? 'solo') == 'solo' ? 'checked' : '' }}
+                       class="peer" style="display:none;" required>
+                <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-sky-500 peer-checked:bg-sky-600/20 peer-checked:text-sky-300 transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    Solo Project
+                </div>
+            </label>
+            <label style="cursor:pointer;">
+                <input type="radio" name="collaboration_type" value="team"
+                       {{ $old('collaboration_type', $project?->collaboration_type) == 'team' ? 'checked' : '' }}
+                       class="peer" style="display:none;" required>
+                <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-emerald-500 peer-checked:bg-emerald-600/20 peer-checked:text-emerald-300 transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    Team Project
+                </div>
+            </label>
+        </div>
+        @error('collaboration_type') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
     </div>
 
     {{-- Description --}}

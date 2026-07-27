@@ -205,6 +205,8 @@
                         'is_featured' => $p->is_featured,
                         'category_name' => $p->category?->name ?? 'General',
                         'category_slug' => $p->category?->slug ?? 'general',
+                        'collaboration_type' => $p->collaboration_type ?? 'solo',
+                        'image' => $p->image ? Storage::url($p->image) : null,
                     ])) }},
                     get filtered() {
                         if (this.activeTab === 'all') return this.projects;
@@ -252,36 +254,66 @@
                             x-transition:enter-start="opacity-0 scale-95"
                             x-transition:enter-end="opacity-100 scale-100"
                         >
-                            {{-- Card Thumbnail Placeholder --}}
-                            <div class="h-44 bg-gradient-to-br from-zinc-800/80 to-zinc-900/60 relative overflow-hidden flex items-center justify-center">
-                                {{-- Decorative pattern --}}
-                                <div class="absolute inset-0 opacity-20"
-                                     style="background-image: radial-gradient(circle at 20% 50%, rgba(99,102,241,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168,85,247,0.2) 0%, transparent 50%);">
-                                </div>
-                                <div class="relative flex flex-col items-center gap-2">
-                                    <div class="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                                        </svg>
+                            {{-- Card Thumbnail --}}
+                            <div class="h-44 bg-gradient-to-br from-zinc-800/80 to-zinc-900/60 relative overflow-hidden flex items-center justify-center group-hover:from-zinc-700/80 group-hover:to-zinc-800/60 transition-colors duration-300">
+                                
+                                {{-- Project Image (if exists) --}}
+                                <template x-if="project.image">
+                                    <div class="absolute inset-0 w-full h-full">
+                                        <img :src="project.image" :alt="project.title" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                        <div class="absolute inset-0 bg-zinc-950/20 group-hover:bg-zinc-950/10 transition-colors duration-300"></div>
                                     </div>
-                                    {{-- Featured badge --}}
-                                    <template x-if="project.is_featured">
-                                        <span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-medium">
-                                            ⭐ Featured
-                                        </span>
-                                    </template>
-                                </div>
-                                <span class="absolute top-3 right-3" x-show="project.is_featured">
-                                    <span class="px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-medium">⭐ Featured</span>
-                                </span>
+                                </template>
+
+                                {{-- Fallback Placeholder --}}
+                                <template x-if="!project.image">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        {{-- Decorative pattern --}}
+                                        <div class="absolute inset-0 opacity-20"
+                                             style="background-image: radial-gradient(circle at 20% 50%, rgba(99,102,241,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168,85,247,0.2) 0%, transparent 50%);">
+                                        </div>
+                                        <div class="relative w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-500/30 transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                {{-- Featured badge --}}
+                                <template x-if="project.is_featured">
+                                    <span class="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full bg-amber-500/90 border border-amber-400/50 text-white text-xs font-medium shadow-lg shadow-amber-500/20 flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
+                                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        Featured
+                                    </span>
+                                </template>
                             </div>
 
                             {{-- Card Body --}}
                             <div class="flex-1 flex flex-col p-5 gap-3">
-                                {{-- Category Tag --}}
-                                <span class="self-start px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium"
-                                      x-text="project.category_name">
-                                </span>
+                                {{-- Badges --}}
+                                <div class="flex flex-wrap items-center gap-2">
+                                    {{-- Category Tag --}}
+                                    <span class="px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium"
+                                          x-text="project.category_name">
+                                    </span>
+                                    
+                                    {{-- Collaboration Type --}}
+                                    <template x-if="project.collaboration_type === 'team'">
+                                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium flex items-center gap-1.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                            Team Project
+                                        </span>
+                                    </template>
+                                    <template x-if="project.collaboration_type === 'solo' || !project.collaboration_type">
+                                        <span class="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-medium flex items-center gap-1.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                            Solo Project
+                                        </span>
+                                    </template>
+                                </div>
 
                                 {{-- Title --}}
                                 <h3 class="font-semibold text-white text-base leading-snug group-hover:text-indigo-300 transition-colors duration-200"

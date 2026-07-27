@@ -22,6 +22,7 @@ class Project extends Model
         'description',
         'image',
         'tech_stack',
+        'collaboration_type',
         'github_url',
         'demo_url',
         'is_featured',

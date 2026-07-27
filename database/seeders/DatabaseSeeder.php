@@ -45,33 +45,36 @@ class DatabaseSeeder extends Seeder
             'description' => 'A full-stack portfolio web application built with Laravel 12, Blade, Tailwind CSS, Alpine.js, and MySQL. Optimized for shared hosting (InfinityFree).',
             'image' => null,
             'tech_stack' => 'Laravel 12, PHP 8.3, Tailwind CSS, Alpine.js, MySQL',
+            'collaboration_type' => 'solo',
             'github_url' => 'https://github.com/Isnaini212/portfolio-app',
             'demo_url' => 'https://example.com',
             'is_featured' => true,
         ]);
 
         Project::create([
-            'category_id' => $categoryAi->id,
-            'title' => 'AI Code Assistant Integrations',
-            'slug' => 'ai-code-assistant-integrations',
-            'description' => 'Custom agents and workflow scripts using DeepMind Antigravity framework for pair programming and automated verification.',
+            'category_id' => $categoryLaravel->id,
+            'title' => 'Website Manajemen Piket',
+            'slug' => 'website-manajemen-piket',
+            'description' => 'Sistem informasi manajemen piket untuk mengatur dan melacak jadwal piket harian secara digital.',
             'image' => null,
-            'tech_stack' => 'Python, Gemini API, Markdown Tools',
-            'github_url' => 'https://github.com/example/ai-assistant',
-            'demo_url' => null,
+            'tech_stack' => 'HTML, CSS, JavaScript, PHP',
+            'collaboration_type' => 'team',
+            'github_url' => null,
+            'demo_url' => 'https://piketrpg.gamer.free',
             'is_featured' => true,
         ]);
 
         Project::create([
-            'category_id' => $categoryFrontend->id,
-            'title' => 'Interactive Dashboard Components',
-            'slug' => 'interactive-dashboard-components',
-            'description' => 'A library of lightweight Alpine.js and Tailwind CSS UI components designed for dynamic web applications.',
+            'category_id' => $categoryLaravel->id,
+            'title' => 'Sistem Penjadwalan Lab ICT',
+            'slug' => 'sistem-penjadwalan-lab-ict',
+            'description' => 'Aplikasi web untuk manajemen dan penjadwalan penggunaan ruangan Laboratorium ICT secara terpusat.',
             'image' => null,
-            'tech_stack' => 'Alpine.js, Tailwind CSS, HTML5',
-            'github_url' => 'https://github.com/example/dashboard-ui',
-            'demo_url' => 'https://example.com/demo-dashboard',
-            'is_featured' => false,
+            'tech_stack' => 'Laravel, Tailwind CSS, MySQL',
+            'collaboration_type' => 'team',
+            'github_url' => 'https://github.com/Isnaini212/penjadwalan-lab-ICT',
+            'demo_url' => null,
+            'is_featured' => true,
         ]);
 
         // Sample Learning Logs
