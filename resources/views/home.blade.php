@@ -396,26 +396,9 @@
                         <div class="col-span-full py-20 text-center">
                             <div class="w-14 h-14 rounded-2xl bg-zinc-800/60 border border-zinc-700/40 flex items-center justify-center mx-auto mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <p class="text-zinc-500 text-sm">No projects in this category yet.</p>
-                        </div>
-                    </template>
-                </div>
-
-                {{-- Project Detail Modal --}}
-                <template x-teleport="body">
-                    <div x-show="selectedProject !== null"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0"
-                         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-zinc-950/80 backdrop-blur-md overflow-y-auto"
-                         style="display: none;"
-                         @click.self="closeModal()">
+                                    <path stroke-linecap="round" stro                          class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 lg:p-8 bg-zinc-950/85 backdrop-blur-md overflow-y-auto"
+                          style="display: none;"
+                          @click.self="closeModal()">
 
                         <div x-show="selectedProject !== null"
                              x-transition:enter="transition ease-out duration-300"
@@ -424,17 +407,17 @@
                              x-transition:leave="transition ease-in duration-200"
                              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                              x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-                             class="relative w-full max-w-4xl max-h-[90vh] bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-y-auto custom-scrollbar my-auto flex flex-col">
+                             class="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] bg-zinc-900 border border-zinc-800 rounded-xl sm:rounded-2xl shadow-2xl overflow-y-auto custom-scrollbar my-auto flex flex-col">
 
                             {{-- Header banner / Cover image --}}
-                            <div class="h-48 sm:h-64 bg-gradient-to-br from-zinc-800 to-zinc-950 relative flex items-center justify-center overflow-hidden shrink-0">
+                            <div class="h-40 sm:h-64 bg-gradient-to-br from-zinc-800 to-zinc-950 relative flex items-center justify-center overflow-hidden shrink-0">
                                 <template x-if="selectedProject?.image">
                                     <img :src="selectedProject.image" :alt="selectedProject.title" class="w-full h-full object-cover">
                                 </template>
                                 <template x-if="!selectedProject?.image">
                                     <div class="absolute inset-0 flex flex-col items-center justify-center opacity-40">
-                                        <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                                             </svg>
                                         </div>
@@ -445,63 +428,63 @@
 
                                 {{-- Close button --}}
                                 <button @click="closeModal()"
-                                        class="fixed sm:absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-700/60 text-zinc-400 hover:text-white hover:bg-zinc-800 flex items-center justify-center transition-all duration-200 shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-400 hover:text-white hover:bg-zinc-800 flex items-center justify-center transition-all duration-200 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
 
                                 {{-- Header Overlay Badges & Title --}}
-                                <div class="absolute bottom-4 left-6 right-6 flex flex-col gap-2 z-10">
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <span class="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold backdrop-blur-sm"
+                                <div class="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6 flex flex-col gap-1.5 sm:gap-2 z-10">
+                                    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                                        <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[11px] sm:text-xs font-semibold backdrop-blur-sm"
                                               x-text="selectedProject?.category_name">
                                         </span>
                                         <template x-if="selectedProject?.collaboration_type === 'team'">
-                                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold backdrop-blur-sm flex items-center gap-1.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                            <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-semibold backdrop-blur-sm flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                                                 Team Project
                                             </span>
                                         </template>
                                         <template x-if="selectedProject?.collaboration_type === 'solo' || !selectedProject?.collaboration_type">
-                                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-300 text-xs font-semibold backdrop-blur-sm flex items-center gap-1.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                            <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-300 text-[11px] sm:text-xs font-semibold backdrop-blur-sm flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                                 Solo Project
                                             </span>
                                         </template>
                                     </div>
-                                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight drop-shadow-md"
+                                    <h2 class="text-xl sm:text-3xl font-bold text-white tracking-tight drop-shadow-md leading-tight"
                                         x-text="selectedProject?.title">
                                     </h2>
                                 </div>
                             </div>
 
                             {{-- Modal Body Content --}}
-                            <div class="p-6 sm:p-8 space-y-6">
+                            <div class="p-4 sm:p-8 space-y-4 sm:space-y-6">
                                 
                                 {{-- Readme Document Box --}}
                                 <div class="rounded-xl border border-zinc-800 bg-zinc-950/70 overflow-hidden shadow-inner">
                                     {{-- Readme File Bar Header --}}
-                                    <div class="px-4 py-2.5 bg-zinc-900/90 border-b border-zinc-800 flex items-center justify-between">
+                                    <div class="px-3.5 py-2.5 bg-zinc-900/90 border-b border-zinc-800 flex items-center justify-between">
                                         <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                             <span>README.md</span>
                                         </div>
-                                        <span class="text-[11px] font-mono text-zinc-600 uppercase">Project Detail & Documentation</span>
+                                        <span class="text-[10px] sm:text-[11px] font-mono text-zinc-600 uppercase">Project Documentation</span>
                                     </div>
 
                                     {{-- If custom README markdown exists --}}
                                     <template x-if="selectedProject?.readme_html">
-                                        <div class="p-6 sm:p-8 markdown-body"
+                                        <div class="p-4 sm:p-8 markdown-body"
                                              x-html="selectedProject.readme_html">
                                         </div>
                                     </template>
 
                                     {{-- Fallback if no custom README markdown --}}
                                     <template x-if="!selectedProject?.readme_html">
-                                        <div class="p-5 space-y-4 text-sm text-zinc-300 leading-relaxed font-sans">
+                                        <div class="p-4 sm:p-6 space-y-4 text-sm text-zinc-300 leading-relaxed font-sans">
                                             <div>
                                                 <h3 class="text-xs uppercase tracking-wider font-semibold text-indigo-400 mb-2 flex items-center gap-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -517,9 +500,9 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                                                     Technologies Used & Ecosystem
                                                 </h3>
-                                                <div class="flex flex-wrap gap-2">
+                                                <div class="flex flex-wrap gap-1.5 sm:gap-2">
                                                     <template x-for="tech in (selectedProject?.tech_stack || '').split(',')" :key="tech">
-                                                        <span class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700/60 text-zinc-200 text-xs font-mono font-medium shadow-sm flex items-center gap-1.5">
+                                                        <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-700/60 text-zinc-200 text-xs font-mono font-medium shadow-sm flex items-center gap-1.5">
                                                             <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
                                                             <span x-text="tech.trim()"></span>
                                                         </span>
@@ -531,17 +514,17 @@
                                 </div>
 
                                 {{-- Action links inside modal --}}
-                                <div class="flex flex-wrap items-center gap-3 pt-2">
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2">
                                     <template x-if="selectedProject?.github_url">
                                         <a :href="selectedProject.github_url" target="_blank" rel="noopener noreferrer"
-                                           class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-medium text-sm transition-all duration-200 border border-zinc-700 shadow-md">
+                                           class="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-medium text-xs sm:text-sm transition-all duration-200 border border-zinc-700 shadow-md">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                                             View Source Code
                                         </a>
                                     </template>
                                     <template x-if="selectedProject?.demo_url">
                                         <a :href="selectedProject.demo_url" target="_blank" rel="noopener noreferrer"
-                                           class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all duration-200 border border-indigo-500 shadow-lg shadow-indigo-600/30">
+                                           class="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs sm:text-sm transition-all duration-200 border border-indigo-500 shadow-lg shadow-indigo-600/30">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                             Visit Live Website
                                         </a>
