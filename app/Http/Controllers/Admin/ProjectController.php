@@ -38,7 +38,8 @@ class ProjectController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => ['required_without:new_category', 'nullable', 'exists:categories,id'],
+            'new_category' => ['required_without:category_id', 'nullable', 'string', 'max:255', 'unique:categories,name'],
             'title'       => ['required', 'string', 'max:255'],
             'slug'        => ['required', 'string', 'max:255', 'unique:projects,slug'],
             'description' => ['required', 'string'],
@@ -53,6 +54,15 @@ class ProjectController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('projects', 'public');
         }
+
+        if (!empty($validated['new_category'])) {
+            $category = Category::create([
+                'name' => $validated['new_category'],
+                'slug' => \Illuminate\Support\Str::slug($validated['new_category'])
+            ]);
+            $validated['category_id'] = $category->id;
+        }
+        unset($validated['new_category']);
 
         $validated['is_featured'] = $request->boolean('is_featured');
 
@@ -78,7 +88,8 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project): RedirectResponse
     {
         $validated = $request->validate([
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => ['required_without:new_category', 'nullable', 'exists:categories,id'],
+            'new_category' => ['required_without:category_id', 'nullable', 'string', 'max:255', 'unique:categories,name'],
             'title'       => ['required', 'string', 'max:255'],
             'slug'        => ['required', 'string', 'max:255', 'unique:projects,slug,' . $project->id],
             'description' => ['required', 'string'],
@@ -97,6 +108,15 @@ class ProjectController extends Controller
             }
             $validated['image'] = $request->file('image')->store('projects', 'public');
         }
+
+        if (!empty($validated['new_category'])) {
+            $category = Category::create([
+                'name' => $validated['new_category'],
+                'slug' => \Illuminate\Support\Str::slug($validated['new_category'])
+            ]);
+            $validated['category_id'] = $category->id;
+        }
+        unset($validated['new_category']);
 
         $validated['is_featured'] = $request->boolean('is_featured');
 

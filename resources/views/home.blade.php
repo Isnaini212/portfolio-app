@@ -232,7 +232,7 @@
                     @foreach($categories as $category)
                         <button
                             id="tab-{{ $category->slug }}"
-                            @click="activeTab = '{{ $category->slug }}'"
+                            @click="activeTab = (activeTab === '{{ $category->slug }}' ? 'all' : '{{ $category->slug }}')"
                             :class="activeTab === '{{ $category->slug }}'
                                 ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-500/20'
                                 : 'bg-transparent text-zinc-400 border-zinc-700/50 hover:text-white hover:border-zinc-600'"

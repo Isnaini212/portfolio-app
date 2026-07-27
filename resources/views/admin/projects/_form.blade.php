@@ -13,7 +13,8 @@
     title: '{{ e($old('title')) }}',
     slug:  '{{ e($old('slug')) }}',
     slugEdited: {{ $project ? 'true' : 'false' }},
-    preview: '{{ $project?->image ? Storage::url($project->image) : '' }}'
+    preview: '{{ $project?->image ? Storage::url($project->image) : '' }}',
+    showNewCategory: {{ old('new_category') ? 'true' : 'false' }}
 }">
 
     {{-- Title --}}
@@ -45,19 +46,35 @@
     {{-- Category --}}
     <div style="{{ $groupStyle }}">
         <label style="{{ $labelStyle }}">Category <span style="color:#f87171;">*</span></label>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
             @foreach($categories as $category)
-                <label style="cursor:pointer;">
+                <label style="cursor:pointer;" x-show="!showNewCategory">
                     <input type="radio" name="category_id" value="{{ $category->id }}"
                            {{ $old('category_id', $project?->category_id) == $category->id ? 'checked' : '' }}
-                           class="peer" style="display:none;" required>
+                           class="peer" style="display:none;" :disabled="showNewCategory">
                     <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-indigo-500 peer-checked:bg-indigo-600/20 peer-checked:text-indigo-300 transition-colors">
                         {{ $category->name }}
                     </div>
                 </label>
             @endforeach
+            
+            <button type="button" 
+                    @click="showNewCategory = !showNewCategory"
+                    x-text="showNewCategory ? 'Cancel' : '+ Add New'"
+                    style="border: 1px dashed #3f3f46; background: transparent; color: #a1a1aa; border-radius: 9999px; padding: 7px 14px; font-size: 12px; cursor: pointer; transition: 0.2s;"
+                    onmouseover="this.style.borderColor='#6366f1'; this.style.color='#6366f1';"
+                    onmouseout="this.style.borderColor='#3f3f46'; this.style.color='#a1a1aa';">
+            </button>
         </div>
+        
+        <div x-show="showNewCategory" x-transition style="margin-top: 10px;">
+            <input type="text" name="new_category" placeholder="Enter new category name..."
+                   class="admin-input" style="{{ $inputStyle }} {{ $errors->has('new_category') ? 'border-color:#f87171;' : '' }}"
+                   :disabled="!showNewCategory" value="{{ old('new_category') }}">
+        </div>
+
         @error('category_id') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+        @error('new_category') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
     </div>
 
     {{-- Project Type --}}
