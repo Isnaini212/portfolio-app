@@ -230,22 +230,7 @@
     {{-- ====================== FOOTER ====================== --}}
     <footer class="border-t border-zinc-800/60 mt-auto relative z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                {{-- Brand Column --}}
-                <div class="space-y-3">
-                    <div class="flex items-center gap-2.5">
-                        <span class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs">
-                            DV
-                        </span>
-                        <span class="font-semibold text-white text-sm tracking-tight">
-                            Dev<span class="text-indigo-400">Portfolio</span>
-                        </span>
-                    </div>
-                    <p class="text-zinc-500 text-sm leading-relaxed">
-                        Personal portfolio & development learning log. Building in public, one commit at a time.
-                    </p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 {{-- Quick Links --}}
                 <div class="space-y-3">
