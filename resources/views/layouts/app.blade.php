@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- Favicon --}}
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
+
     {{-- SEO --}}
-    <title>{{ $title ?? config('app.name', 'DevPortfolio') }}</title>
+    <title>{{ isset($title) ? $title . ' — ' . config('app.name', 'DevPortfolio') : 'DevPortfolio — Personal Portfolio & DevLog' }}</title>
     <meta name="description" content="{{ $description ?? 'A personal portfolio & development learning log. Showcasing projects, skills, and the journey of continuous learning.' }}">
     <meta name="author" content="{{ config('app.name') }}">
     <meta property="og:title" content="{{ $title ?? config('app.name', 'DevPortfolio') }}">
@@ -118,7 +121,17 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
 
-                    <div></div>
+                    {{-- Brand Logo --}}
+                    <a href="{{ route('home') }}" class="flex items-center gap-2.5 group">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center group-hover:bg-indigo-600/30 group-hover:border-indigo-500/50 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <span class="font-bold text-white tracking-tight text-base group-hover:text-indigo-300 transition-colors">
+                            Dev<span class="text-indigo-400">Portfolio</span>
+                        </span>
+                    </a>
 
                     {{-- Desktop Nav --}}
                     <div class="hidden md:flex items-center gap-8" id="nav-desktop-links">
