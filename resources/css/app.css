@@ -1,3 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --color-accent: 99 102 241; /* indigo-500 */
+        --color-accent-glow: 129 140 248; /* indigo-400 */
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    code, pre, kbd {
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #09090b;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #3f3f46;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #6366f1;
+    }
+}
+
+@layer components {
+    /* Glassmorphism card */
+    .glass-card {
+        @apply bg-zinc-900/60 backdrop-blur-md border border-zinc-700/50 rounded-2xl;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+    }
+
+    /* Accent glow button */
+    .btn-accent {
+        @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+               bg-indigo-600 hover:bg-indigo-500 text-white
+               shadow-lg shadow-indigo-500/20
+               transition-all duration-200
+               hover:shadow-indigo-400/30 hover:-translate-y-0.5;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+               text-zinc-300 hover:text-white bg-transparent
+               hover:bg-zinc-800/80 border border-zinc-700/50
+               transition-all duration-200;
+    }
+
+    /* Nav link */
+    .nav-link {
+        @apply text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200 relative
+               after:absolute after:bottom-0 after:left-0 after:h-px after:w-0
+               after:bg-indigo-400 after:transition-all after:duration-200
+               hover:after:w-full;
+    }
+
+    .nav-link-active {
+        @apply text-sm font-medium text-white relative
+               after:absolute after:bottom-0 after:left-0 after:h-px after:w-full
+               after:bg-indigo-400;
+    }
+
+    /* Status badge */
+    .badge-planning {
+        @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium
+               bg-sky-500/10 text-sky-400 border border-sky-500/20;
+    }
+
+    .badge-in_progress {
+        @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium
+               bg-amber-500/10 text-amber-400 border border-amber-500/20;
+    }
+
+    .badge-completed {
+        @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium
+               bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+    }
+}
+
+@layer utilities {
+    /* Subtle glow effect on hover for cards */
+    .glow-hover {
+        transition: box-shadow 0.3s ease;
+    }
+    .glow-hover:hover {
+        box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Noise texture overlay */
+    .noise::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+    }
+}
