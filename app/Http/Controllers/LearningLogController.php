@@ -2,34 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\LearningLog;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class LearningLogController extends Controller
 {
     /**
-     * Display a listing of learning logs with optional filtering.
+     * Redirect public /logs route to the DevLog section on the single-page home layout.
      */
-    public function index(Request $request): View
+    public function index(): RedirectResponse
     {
-        $query = LearningLog::with('category');
-
-        if ($request->filled('category')) {
-            $query->whereHas('category', function ($q) use ($request): void {
-                $q->where('slug', $request->input('category'));
-            });
-        }
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->input('status'));
-        }
-
-        $logs = $query->latest('learned_at')->latest()->paginate(10)->withQueryString();
-        $categories = Category::all();
-        $statuses = ['planning', 'in_progress', 'completed'];
-
-        return view('logs.index', compact('logs', 'categories', 'statuses'));
+        return redirect()->to(route('home') . '#devlog-preview');
     }
 }

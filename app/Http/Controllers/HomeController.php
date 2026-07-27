@@ -7,6 +7,8 @@ use App\Models\LearningLog;
 use App\Models\Project;
 use Illuminate\View\View;
 
+use App\Models\Setting;
+
 class HomeController extends Controller
 {
     /**
@@ -24,9 +26,19 @@ class HomeController extends Controller
         $recentLogs = LearningLog::with('category')
             ->latest('learned_at')
             ->latest()
-            ->take(5)
             ->get();
 
-        return view('home', compact('featuredProjects', 'categories', 'recentLogs'));
+        $settings = Setting::getMany([
+            'preloader_text'    => 'WELCOME TO MY PORTFOLIO',
+            'hero_status_badge' => 'Open to work',
+            'hero_sub_badge'    => 'Building & learning in public',
+            'hero_headline_1'   => 'Full-Stack',
+            'hero_headline_2'   => 'Developer',
+            'hero_headline_3'   => '& DevLog',
+            'hero_bio'          => 'Building performant web applications using Laravel, Tailwind CSS, and Alpine.js. Documenting every step of the journey here.',
+            'hero_email'        => 'hello@example.com',
+        ]);
+
+        return view('home', compact('featuredProjects', 'categories', 'recentLogs', 'settings'));
     }
 }

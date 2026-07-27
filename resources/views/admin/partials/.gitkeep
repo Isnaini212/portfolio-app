@@ -1,0 +1,4 @@
+{{--
+    Shared admin form fields partial.
+    Usage: @include('admin.partials.form-field', ['name' => ..., 'label' => ..., 'type' => ..., 'required' => ...])
+--}}

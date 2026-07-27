@@ -5,14 +5,13 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class AppLayout extends Component
+class AdminLayout extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $title = '',
-        public string $description = '',
+        public string $title = 'Admin',
     ) {}
 
     /**
@@ -20,6 +19,6 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        return view('admin.layouts.app');
     }
 }
