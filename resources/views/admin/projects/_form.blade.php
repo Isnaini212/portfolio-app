@@ -19,6 +19,16 @@
     isSavingCategory: false,
     categories: {{ Js::from($categories->map(fn($c) => ['id' => $c->id, 'name' => $c->name])) }},
     selectedCategory: {{ old('category_id', $project?->category_id) ?: 'null' }},
+    readmeContent: {!! Js::from($old('readme')) !!},
+    handleMdUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.readmeContent = e.target.result;
+        };
+        reader.readAsText(file);
+    },
     async saveCategory() {
         if (!this.newCategoryName.trim()) return;
         this.isSavingCategory = true;
@@ -154,12 +164,24 @@
 
     {{-- Readme Markdown --}}
     <div style="{{ $groupStyle }}">
-        <label for="readme" style="{{ $labelStyle }}">Project README / Full Documentation (Markdown)</label>
-        <textarea id="readme" name="readme" rows="10"
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <label for="readme" style="{{ $labelStyle }};margin-bottom:0;">Project README / Full Documentation (Markdown)</label>
+            <label style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;background:#27272a;border:1px solid #3f3f46;color:#a1a1aa;font-size:12px;font-weight:500;transition:0.15s;"
+                   onmouseover="this.style.borderColor='#6366f1';this.style.color='#fff';"
+                   onmouseout="this.style.borderColor='#3f3f46';this.style.color='#a1a1aa';">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <span>Upload .md File</span>
+                <input type="file" accept=".md,.txt,.text" @change="handleMdUpload($event)" style="display:none;">
+            </label>
+        </div>
+        <textarea id="readme" name="readme" rows="12"
+                  x-model="readmeContent"
                   placeholder="# Project Title&#10;&#10;Detailed explanation of the project using Markdown format..."
                   class="admin-input"
-                  style="{{ $inputStyle }} resize:vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; line-height: 1.6; {{ $errors->has('readme') ? 'border-color:#f87171;' : '' }}">{{ $old('readme') }}</textarea>
-        <span style="font-size:11px;color:#52525b;margin-top:4px;display:block;">Supports standard Markdown syntax (# Heading, **bold**, lists, code blocks, tables).</span>
+                  style="{{ $inputStyle }} resize:vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; line-height: 1.6; {{ $errors->has('readme') ? 'border-color:#f87171;' : '' }}"></textarea>
+        <span style="font-size:11px;color:#52525b;margin-top:4px;display:block;">Supports standard Markdown syntax (# Heading, **bold**, lists, code blocks, tables). Uploading a file will automatically fill the text above for further editing.</span>
         @error('readme') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
     </div>
 

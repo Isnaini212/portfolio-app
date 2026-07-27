@@ -424,10 +424,10 @@
                              x-transition:leave="transition ease-in duration-200"
                              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                              x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-                             class="relative w-full max-w-3xl max-h-[90vh] bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto">
+                             class="relative w-full max-w-4xl max-h-[90vh] bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-y-auto custom-scrollbar my-auto flex flex-col">
 
                             {{-- Header banner / Cover image --}}
-                            <div class="h-56 sm:h-72 bg-gradient-to-br from-zinc-800 to-zinc-950 relative flex items-center justify-center overflow-hidden shrink-0">
+                            <div class="h-48 sm:h-64 bg-gradient-to-br from-zinc-800 to-zinc-950 relative flex items-center justify-center overflow-hidden shrink-0">
                                 <template x-if="selectedProject?.image">
                                     <img :src="selectedProject.image" :alt="selectedProject.title" class="w-full h-full object-cover">
                                 </template>
@@ -445,7 +445,7 @@
 
                                 {{-- Close button --}}
                                 <button @click="closeModal()"
-                                        class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-700/60 text-zinc-400 hover:text-white hover:bg-zinc-800 flex items-center justify-center transition-all duration-200 shadow-lg">
+                                        class="fixed sm:absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-700/60 text-zinc-400 hover:text-white hover:bg-zinc-800 flex items-center justify-center transition-all duration-200 shadow-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
@@ -477,7 +477,7 @@
                             </div>
 
                             {{-- Modal Body Content --}}
-                            <div class="p-6 sm:p-8 space-y-6 overflow-y-auto custom-scrollbar flex-1">
+                            <div class="p-6 sm:p-8 space-y-6">
                                 
                                 {{-- Readme Document Box --}}
                                 <div class="rounded-xl border border-zinc-800 bg-zinc-950/70 overflow-hidden shadow-inner">
@@ -494,7 +494,7 @@
 
                                     {{-- If custom README markdown exists --}}
                                     <template x-if="selectedProject?.readme_html">
-                                        <div class="p-6 prose prose-invert max-w-none prose-indigo prose-sm sm:prose-base prose-headings:text-indigo-300 prose-headings:font-bold prose-a:text-indigo-400 prose-code:text-amber-300 prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-zinc-800 prose-pre:rounded-xl prose-hr:border-zinc-800 prose-table:border-zinc-800 prose-th:bg-zinc-900 prose-th:text-zinc-200 prose-td:border-zinc-800"
+                                        <div class="p-6 sm:p-8 markdown-body"
                                              x-html="selectedProject.readme_html">
                                         </div>
                                     </template>
