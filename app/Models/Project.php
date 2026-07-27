@@ -20,6 +20,7 @@ class Project extends Model
         'title',
         'slug',
         'description',
+        'readme',
         'image',
         'tech_stack',
         'collaboration_type',

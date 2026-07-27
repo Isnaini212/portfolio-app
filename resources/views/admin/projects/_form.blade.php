@@ -143,13 +143,24 @@
 
     {{-- Description --}}
     <div style="{{ $groupStyle }}">
-        <label for="description" style="{{ $labelStyle }}">Description <span style="color:#f87171;">*</span></label>
-        <textarea id="description" name="description" rows="4"
-                  placeholder="Describe the project..."
+        <label for="description" style="{{ $labelStyle }}">Short Description <span style="color:#f87171;">*</span></label>
+        <textarea id="description" name="description" rows="3"
+                  placeholder="Short summary displayed on project cards..."
                   class="admin-input"
                   style="{{ $inputStyle }} resize:vertical; {{ $errors->has('description') ? 'border-color:#f87171;' : '' }}"
                   required>{{ $old('description') }}</textarea>
         @error('description') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+    </div>
+
+    {{-- Readme Markdown --}}
+    <div style="{{ $groupStyle }}">
+        <label for="readme" style="{{ $labelStyle }}">Project README / Full Documentation (Markdown)</label>
+        <textarea id="readme" name="readme" rows="10"
+                  placeholder="# Project Title&#10;&#10;Detailed explanation of the project using Markdown format..."
+                  class="admin-input"
+                  style="{{ $inputStyle }} resize:vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; line-height: 1.6; {{ $errors->has('readme') ? 'border-color:#f87171;' : '' }}">{{ $old('readme') }}</textarea>
+        <span style="font-size:11px;color:#52525b;margin-top:4px;display:block;">Supports standard Markdown syntax (# Heading, **bold**, lists, code blocks, tables).</span>
+        @error('readme') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
     </div>
 
     {{-- Tech Stack --}}

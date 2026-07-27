@@ -216,6 +216,7 @@
                         'category_slug' => $p->category?->slug ?? 'general',
                         'collaboration_type' => $p->collaboration_type ?? 'solo',
                         'image' => $p->image ? Storage::url($p->image) : null,
+                        'readme_html' => $p->readme ? Illuminate\Support\Str::markdown($p->readme) : null,
                     ])) !!},
                     get filtered() {
                         if (this.activeTab === 'all') return this.projects;
@@ -491,32 +492,42 @@
                                         <span class="text-[11px] font-mono text-zinc-600 uppercase">Project Detail & Documentation</span>
                                     </div>
 
-                                    <div class="p-5 space-y-4 text-sm text-zinc-300 leading-relaxed font-sans">
-                                        <div>
-                                            <h3 class="text-xs uppercase tracking-wider font-semibold text-indigo-400 mb-2 flex items-center gap-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                                Project Overview & Description
-                                            </h3>
-                                            <p class="text-zinc-300 text-sm sm:text-base leading-relaxed whitespace-pre-line"
-                                               x-text="selectedProject?.description">
-                                            </p>
+                                    {{-- If custom README markdown exists --}}
+                                    <template x-if="selectedProject?.readme_html">
+                                        <div class="p-6 prose prose-invert max-w-none prose-indigo prose-sm sm:prose-base prose-headings:text-indigo-300 prose-headings:font-bold prose-a:text-indigo-400 prose-code:text-amber-300 prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-zinc-800 prose-pre:rounded-xl prose-hr:border-zinc-800 prose-table:border-zinc-800 prose-th:bg-zinc-900 prose-th:text-zinc-200 prose-td:border-zinc-800"
+                                             x-html="selectedProject.readme_html">
                                         </div>
+                                    </template>
 
-                                        <div class="pt-4 border-t border-zinc-800/80">
-                                            <h3 class="text-xs uppercase tracking-wider font-semibold text-indigo-400 mb-3 flex items-center gap-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                                                Technologies Used & Ecosystem
-                                            </h3>
-                                            <div class="flex flex-wrap gap-2">
-                                                <template x-for="tech in (selectedProject?.tech_stack || '').split(',')" :key="tech">
-                                                    <span class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700/60 text-zinc-200 text-xs font-mono font-medium shadow-sm flex items-center gap-1.5">
-                                                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-                                                        <span x-text="tech.trim()"></span>
-                                                    </span>
-                                                </template>
+                                    {{-- Fallback if no custom README markdown --}}
+                                    <template x-if="!selectedProject?.readme_html">
+                                        <div class="p-5 space-y-4 text-sm text-zinc-300 leading-relaxed font-sans">
+                                            <div>
+                                                <h3 class="text-xs uppercase tracking-wider font-semibold text-indigo-400 mb-2 flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                    Project Overview & Description
+                                                </h3>
+                                                <p class="text-zinc-300 text-sm sm:text-base leading-relaxed whitespace-pre-line"
+                                                   x-text="selectedProject?.description">
+                                                </p>
+                                            </div>
+
+                                            <div class="pt-4 border-t border-zinc-800/80">
+                                                <h3 class="text-xs uppercase tracking-wider font-semibold text-indigo-400 mb-3 flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                                                    Technologies Used & Ecosystem
+                                                </h3>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <template x-for="tech in (selectedProject?.tech_stack || '').split(',')" :key="tech">
+                                                        <span class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700/60 text-zinc-200 text-xs font-mono font-medium shadow-sm flex items-center gap-1.5">
+                                                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                                                            <span x-text="tech.trim()"></span>
+                                                        </span>
+                                                    </template>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </template>
                                 </div>
 
                                 {{-- Action links inside modal --}}
