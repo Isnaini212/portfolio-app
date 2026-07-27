@@ -46,6 +46,26 @@ class CategoryController extends Controller
     }
 
     /**
+     * Quick add a category via AJAX.
+     */
+    public function quickAdd(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:100', 'unique:categories,name']
+        ]);
+
+        $category = Category::create([
+            'name' => $request->name,
+            'slug' => \Illuminate\Support\Str::slug($request->name)
+        ]);
+
+        return response()->json([
+            'success' => true, 
+            'category' => $category
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified category.
      */
     public function edit(Category $category): View

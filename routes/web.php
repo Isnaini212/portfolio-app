@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
 
         // Categories CRUD
+        Route::post('categories/quick-add', [AdminCategoryController::class, 'quickAdd'])->name('categories.quickAdd');
         Route::resource('categories', AdminCategoryController::class);
 
         // Projects CRUD

@@ -14,7 +14,40 @@
     slug:  '{{ e($old('slug')) }}',
     slugEdited: {{ $project ? 'true' : 'false' }},
     preview: '{{ $project?->image ? Storage::url($project->image) : '' }}',
-    showNewCategory: {{ old('new_category') ? 'true' : 'false' }}
+    showNewCategory: false,
+    newCategoryName: '',
+    isSavingCategory: false,
+    categories: {{ Js::from($categories->map(fn($c) => ['id' => $c->id, 'name' => $c->name])) }},
+    selectedCategory: {{ old('category_id', $project?->category_id) ?: 'null' }},
+    async saveCategory() {
+        if (!this.newCategoryName.trim()) return;
+        this.isSavingCategory = true;
+        try {
+            let res = await fetch('{{ route("admin.categories.quickAdd") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ name: this.newCategoryName })
+            });
+            let data = await res.json();
+            if (data.success) {
+                this.categories.push({ id: data.category.id, name: data.category.name });
+                // Sort categories by name alphabetically
+                this.categories.sort((a, b) => a.name.localeCompare(b.name));
+                this.selectedCategory = data.category.id;
+                this.showNewCategory = false;
+                this.newCategoryName = '';
+            } else {
+                alert('Error: ' + (data.message || 'Validation failed.'));
+            }
+        } catch(e) {
+            alert('Failed to connect to the server.');
+        }
+        this.isSavingCategory = false;
+    }
 }">
 
     {{-- Title --}}
@@ -47,16 +80,15 @@
     <div style="{{ $groupStyle }}">
         <label style="{{ $labelStyle }}">Category <span style="color:#f87171;">*</span></label>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-            @foreach($categories as $category)
+            <template x-for="cat in categories" :key="cat.id">
                 <label style="cursor:pointer;" x-show="!showNewCategory">
-                    <input type="radio" name="category_id" value="{{ $category->id }}"
-                           {{ $old('category_id', $project?->category_id) == $category->id ? 'checked' : '' }}
+                    <input type="radio" name="category_id" :value="cat.id" x-model="selectedCategory"
                            class="peer" style="display:none;" :disabled="showNewCategory">
-                    <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-indigo-500 peer-checked:bg-indigo-600/20 peer-checked:text-indigo-300 transition-colors">
-                        {{ $category->name }}
+                    <div class="px-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900 text-zinc-400 text-xs font-medium peer-checked:border-indigo-500 peer-checked:bg-indigo-600/20 peer-checked:text-indigo-300 transition-colors"
+                         x-text="cat.name">
                     </div>
                 </label>
-            @endforeach
+            </template>
             
             <button type="button" 
                     @click="showNewCategory = !showNewCategory"
@@ -67,14 +99,20 @@
             </button>
         </div>
         
-        <div x-show="showNewCategory" x-transition style="margin-top: 10px;">
-            <input type="text" name="new_category" placeholder="Enter new category name..."
-                   class="admin-input" style="{{ $inputStyle }} {{ $errors->has('new_category') ? 'border-color:#f87171;' : '' }}"
-                   :disabled="!showNewCategory" value="{{ old('new_category') }}">
+        <div x-show="showNewCategory" x-transition style="margin-top: 10px; display: flex; gap: 10px;">
+            <input type="text" x-model="newCategoryName" placeholder="Enter new category name..."
+                   class="admin-input" style="{{ $inputStyle }} max-width: 300px;"
+                   :disabled="!showNewCategory" @keydown.enter.prevent="saveCategory">
+            <button type="button" @click="saveCategory" :disabled="isSavingCategory"
+                    style="padding:9px 16px;border-radius:8px;background:#10b981;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background 0.15s; display:flex; align-items:center; gap:6px;"
+                    onmouseover="this.style.background='#059669';"
+                    onmouseout="this.style.background='#10b981';">
+                <span x-show="!isSavingCategory">Save Category</span>
+                <span x-show="isSavingCategory">Saving...</span>
+            </button>
         </div>
 
         @error('category_id') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
-        @error('new_category') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
     </div>
 
     {{-- Project Type --}}
