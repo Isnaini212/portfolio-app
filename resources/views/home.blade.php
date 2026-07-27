@@ -396,9 +396,26 @@
                         <div class="col-span-full py-20 text-center">
                             <div class="w-14 h-14 rounded-2xl bg-zinc-800/60 border border-zinc-700/40 flex items-center justify-center mx-auto mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path stroke-linecap="round" stro                          class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 lg:p-8 bg-zinc-950/85 backdrop-blur-md overflow-y-auto"
-                          style="display: none;"
-                          @click.self="closeModal()">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-zinc-500 text-sm">No projects in this category yet.</p>
+                        </div>
+                    </template>
+                </div>
+
+                {{-- Project Detail Modal --}}
+                <template x-teleport="body">
+                    <div x-show="selectedProject !== null"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 lg:p-8 bg-zinc-950/85 backdrop-blur-md overflow-y-auto"
+                         style="display: none;"
+                         @click.self="closeModal()">
 
                         <div x-show="selectedProject !== null"
                              x-transition:enter="transition ease-out duration-300"
