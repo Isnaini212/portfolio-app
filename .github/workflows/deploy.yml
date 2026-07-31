@@ -57,5 +57,4 @@ jobs:
             **/tests/**
             .env
             README.md
-            **/storage/app/public/**
             **/public/storage/**

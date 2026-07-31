@@ -7,9 +7,22 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LearningLogController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+
+// ── Storage Fallback Route for Shared Hosting / InfinityFree (No symlink support) ──
+Route::get('/storage/{path}', function (string $path) {
+    $fullPath = storage_path('app/public/' . $path);
+
+    if (str_contains($path, '..') || !File::exists($fullPath)) {
+        abort(404);
+    }
+
+    return Response::file($fullPath);
+})->where('path', '.*');
 
 // ── Public routes ─────────────────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
