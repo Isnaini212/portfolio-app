@@ -13,7 +13,7 @@
     title: '{{ e($old('title')) }}',
     slug:  '{{ e($old('slug')) }}',
     slugEdited: {{ $project ? 'true' : 'false' }},
-    preview: '{{ $project?->image ? Storage::url($project->image) : '' }}',
+    preview: '{{ $project?->image ? Storage::disk('public')->url($project->image) : '' }}',
     showNewCategory: false,
     newCategoryName: '',
     isSavingCategory: false,

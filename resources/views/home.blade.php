@@ -215,7 +215,7 @@
                         'category_name' => $p->category?->name ?? 'General',
                         'category_slug' => $p->category?->slug ?? 'general',
                         'collaboration_type' => $p->collaboration_type ?? 'solo',
-                        'image' => $p->image ? Storage::url($p->image) : null,
+                        'image' => $p->image ? Storage::disk('public')->url($p->image) : null,
                         'readme_html' => $p->readme ? Illuminate\Support\Str::markdown($p->readme) : null,
                     ])) !!},
                     get filtered() {
