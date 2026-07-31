@@ -1,0 +1,59 @@
+name: 🚀 Deploy Laravel to InfinityFree
+
+on:
+  push:
+    branches:
+      - main  # Ubah jika branch utama Anda master
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      # 2. Setup PHP 8.3 di Runner GitHub
+      - name: ⚙️ Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, bcmath
+          coverage: none
+
+      # 3. Setup Node.js untuk Asset (Vite/Mix)
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 4. Install Vendor/Dependencies PHP
+      - name: 📦 Install Composer Dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      # 5. Build Asset Frontend (CSS / JS)
+      - name: 🛠️ Build Assets
+        run: |
+          npm install
+          npm run build
+
+      # 6. Sync File ke InfinityFree
+      - name: 📂 Sync Files to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./htdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/tests/**
+            .env
+            README.md
+            **/storage/app/public/**
+            **/public/storage/**
