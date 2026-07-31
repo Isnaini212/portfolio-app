@@ -15,13 +15,21 @@ use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 
 // ── Storage Fallback Route for Shared Hosting / InfinityFree (No symlink support) ──
 Route::get('/storage/{path}', function (string $path) {
-    $fullPath = storage_path('app/public/' . $path);
-
-    if (str_contains($path, '..') || !File::exists($fullPath)) {
+    if (str_contains($path, '..')) {
         abort(404);
     }
 
-    return Response::file($fullPath);
+    $uploadPath = public_path('uploads/' . $path);
+    if (File::exists($uploadPath)) {
+        return Response::file($uploadPath);
+    }
+
+    $storagePath = storage_path('app/public/' . $path);
+    if (File::exists($storagePath)) {
+        return Response::file($storagePath);
+    }
+
+    abort(404);
 })->where('path', '.*');
 
 // ── Public routes ─────────────────────────────────────────────────────────────
