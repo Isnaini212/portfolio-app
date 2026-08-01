@@ -7,10 +7,16 @@
                 <h2 style="font-size:16px;font-weight:600;color:#f4f4f5;margin:0 0 2px;">Hero &amp; Site Settings</h2>
                 <p style="font-size:12px;color:#52525b;margin:0;">Customize text and headlines displayed on the home page hero section.</p>
             </div>
+            <button type="submit" form="settings-form"
+                    style="padding:9px 18px;border-radius:8px;background:#4f46e5;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background 0.15s;"
+                    onmouseover="this.style.background='#4338ca';"
+                    onmouseout="this.style.background='#4f46e5';">
+                Save Settings
+            </button>
         </div>
 
         <div style="background:#111113;border:1px solid #1f1f22;border-radius:10px;padding:24px;">
-            <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
+            <form id="settings-form" action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 @php
@@ -276,7 +282,12 @@
                                         atau <span style="color:#818cf8;text-decoration:underline;font-weight:600;">Klik di sini untuk memilih file</span>
                                     </p>
                                     <template x-if="fileName">
-                                        <span style="display:inline-block;padding:4px 10px;border-radius:6px;background:#312e81;color:#c7d2fe;font-size:11px;font-weight:600;" x-text="'Terpilih: ' + fileName"></span>
+                                        <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;justify-content:center;" @click.stop="">
+                                            <span style="display:inline-block;padding:5px 12px;border-radius:6px;background:#312e81;color:#c7d2fe;font-size:11px;font-weight:600;" x-text="'Terpilih: ' + fileName"></span>
+                                            <button type="submit" form="settings-form" style="padding:6px 14px;border-radius:6px;background:#22c55e;color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(34,197,94,0.3);transition:background 0.15s;" onmouseover="this.style.background='#16a34a';" onmouseout="this.style.background='#22c55e';">
+                                                Simpan Foto Sekarang
+                                            </button>
+                                        </div>
                                     </template>
                                 </div>
                             </div>
