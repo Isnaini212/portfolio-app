@@ -301,6 +301,52 @@
                     </div>
                 </div>
 
+                {{-- Section Divider: Akun Admin Login --}}
+                <div style="margin:28px 0 16px;padding-top:20px;border-top:1px solid #1f1f22;">
+                    <h3 style="font-size:14px;font-weight:600;color:#818cf8;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.05em;">🔐 Kredensial Akun Admin (Email &amp; Password)</h3>
+                    <p style="font-size:11px;color:#71717a;margin:0;">Ubah email dan password yang digunakan untuk masuk ke Dashboard Admin.</p>
+                </div>
+
+                {{-- Admin Login Email --}}
+                <div style="{{ $groupStyle }}">
+                    <label for="admin_email" style="{{ $labelStyle }}">Email Login Admin</label>
+                    <input type="email" id="admin_email" name="admin_email"
+                           value="{{ old('admin_email', auth()->user()->email ?? '') }}"
+                           placeholder="admin@example.com"
+                           class="admin-input"
+                           style="{{ $inputStyle }} {{ $errors->has('admin_email') ? 'border-color:#f87171;' : '' }}">
+                    @error('admin_email') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+                </div>
+
+                {{-- Current Password --}}
+                <div style="{{ $groupStyle }}">
+                    <label for="current_password" style="{{ $labelStyle }}">Password Saat Ini (Diperlukan jika ganti password)</label>
+                    <input type="password" id="current_password" name="current_password"
+                           placeholder="••••••••"
+                           class="admin-input"
+                           style="{{ $inputStyle }} {{ $errors->has('current_password') ? 'border-color:#f87171;' : '' }}">
+                    @error('current_password') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+                </div>
+
+                {{-- New Password --}}
+                <div style="{{ $groupStyle }}">
+                    <label for="new_password" style="{{ $labelStyle }}">Password Baru</label>
+                    <input type="password" id="new_password" name="new_password"
+                           placeholder="Minimal 8 karakter (kosongkan jika tidak ingin mengubah)"
+                           class="admin-input"
+                           style="{{ $inputStyle }} {{ $errors->has('new_password') ? 'border-color:#f87171;' : '' }}">
+                    @error('new_password') <span style="{{ $errorStyle }}">{{ $message }}</span> @enderror
+                </div>
+
+                {{-- New Password Confirmation --}}
+                <div style="{{ $groupStyle }}">
+                    <label for="new_password_confirmation" style="{{ $labelStyle }}">Konfirmasi Password Baru</label>
+                    <input type="password" id="new_password_confirmation" name="new_password_confirmation"
+                           placeholder="Ulangi password baru"
+                           class="admin-input"
+                           style="{{ $inputStyle }}">
+                </div>
+
                 {{-- Submit --}}
                 <div style="display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px solid #1f1f22;margin-top:10px;">
                     <button type="submit"

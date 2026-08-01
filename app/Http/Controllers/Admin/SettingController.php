@@ -42,6 +42,8 @@ class SettingController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        $user = \Illuminate\Support\Facades\Auth::user();
+
         $validated = $request->validate([
             'preloader_text'     => ['required', 'string', 'max:150'],
             'hero_status_badge'  => ['required', 'string', 'max:100'],
@@ -60,7 +62,29 @@ class SettingController extends Controller
             'profile_website'    => ['nullable', 'string', 'max:150'],
             'profile_photo'      => ['nullable', 'string', 'max:255'],
             'profile_photo_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
+            'admin_email'        => ['nullable', 'email', 'max:255', 'unique:users,email,' . ($user ? $user->id : '')],
+            'current_password'   => ['nullable', 'required_with:new_password', 'current_password'],
+            'new_password'       => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
+
+        // Update Admin Account Email
+        if ($user && $request->filled('admin_email') && $request->admin_email !== $user->email) {
+            $user->email = $request->admin_email;
+            $user->save();
+        }
+
+        // Update Admin Account Password
+        if ($user && $request->filled('new_password')) {
+            $user->password = \Illuminate\Support\Facades\Hash::make($request->new_password);
+            $user->save();
+        }
+
+        unset(
+            $validated['admin_email'],
+            $validated['current_password'],
+            $validated['new_password'],
+            $validated['new_password_confirmation']
+        );
 
         // Handle profile photo CRUD operations
         $currentPhoto = Setting::get('profile_photo', 'images/profile-photo.png');
@@ -89,6 +113,6 @@ class SettingController extends Controller
         }
 
         return redirect()->route('admin.settings.index')
-            ->with('success', 'Pengaturan situs & foto profil berhasil diperbarui.');
+            ->with('success', 'Pengaturan situs & akun admin berhasil diperbarui.');
     }
 }
