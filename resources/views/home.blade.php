@@ -524,6 +524,7 @@
                                     } else {
                                         $profilePhotoUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($photoPath);
                                     }
+                                    $profilePhotoUrl .= '?v=' . time();
                                 @endphp
 
                                 <img
