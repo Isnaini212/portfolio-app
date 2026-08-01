@@ -79,7 +79,7 @@
 
                     {{-- Social icons row --}}
                     <div class="flex items-center gap-3" id="hero-social-row">
-                        <a href="https://github.com/Isnaini212" target="_blank" rel="noopener noreferrer"
+                        <a href="https://{{ str_replace(['https://', 'http://'], '', $settings['profile_github'] ?? 'github.com/Isnaini212') }}" target="_blank" rel="noopener noreferrer"
                            id="social-github"
                            aria-label="GitHub profile"
                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-800/80 border border-zinc-700/50 text-zinc-400 hover:text-white hover:border-indigo-500/60 hover:bg-indigo-500/10 transition-all duration-200">
@@ -198,16 +198,6 @@
                     progress: 0,
                     progressInterval: null,
                     isPlaying: true,
-                    touchStartX: 0,
-                    touchEndX: 0,
-                    handleTouchStart(e) {
-                        this.touchStartX = e.changedTouches[0].screenX;
-                    },
-                    handleTouchEnd(e) {
-                        this.touchEndX = e.changedTouches[0].screenX;
-                        if (this.touchStartX - this.touchEndX > 40) this.next();
-                        if (this.touchEndX - this.touchStartX > 40) this.prev();
-                    },
                     next() {
                         this.direction = 'next';
                         this.slide = (this.slide + 1) % this.total;
@@ -269,8 +259,6 @@
                 "
                 @mouseenter="pauseTimer()"
                 @mouseleave="resumeTimer()"
-                @touchstart="pauseTimer()"
-                @touchend="resumeTimer()"
                 :class="visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-16 scale-[0.96]'"
                 @keydown.left.window="prev()"
                 @keydown.right.window="next()"
@@ -392,7 +380,7 @@
                                         <span class="px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-mono font-semibold">
                                             ID BADGE #2026
                                         </span>
-                                        <span class="text-xs text-zinc-500 font-medium">Tangerang, Banten, ID</span>
+                                        <span class="text-xs text-zinc-500 font-medium">{{ $settings['profile_location'] ?? 'Tangerang, Banten' }}</span>
                                     </div>
 
                                     {{-- Full Name --}}
@@ -554,7 +542,7 @@
                                 {{-- Corner Badge --}}
                                 <div class="absolute bottom-4 right-4 z-20 px-3 py-1.5 rounded-lg bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-mono text-zinc-300 backdrop-blur-md flex items-center gap-2 shadow-lg group-hover/tilt:border-cyan-500/50 transition-colors">
                                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                                    Mahasiswa Aktif SI
+                                    {{ $settings['profile_role'] ?? 'Mahasiswa Aktif SI' }}
                                 </div>
 
                             </div>
@@ -1257,11 +1245,13 @@
                 var height = 0;
                 var particles = [];
                 var trailParticles = [];
-                var particleCount = 110; // Denser particle count
+                var isMobile = window.innerWidth < 768;
+                var particleCount = isMobile ? 35 : 90;
 
                 var mouse = { x: -1000, y: -1000, active: false };
 
                 function resize() {
+                    isMobile = window.innerWidth < 768;
                     width = canvas.width = heroSection.offsetWidth;
                     height = canvas.height = heroSection.offsetHeight;
                 }
@@ -1424,6 +1414,7 @@
                     }
 
                     // Inter-particle lines
+                    if (isMobile) return;
                     for (var a = 0; a < particles.length; a++) {
                         for (var b = a + 1; b < particles.length; b++) {
                             var pA = particles[a];

@@ -43,6 +43,7 @@ class HomeController extends Controller
             'profile_location'  => 'Tangerang, Banten',
             'profile_email'     => 'muhamadisnaini121@gmail.com',
             'profile_github'    => 'github.com/Isnaini212',
+            'profile_linkedin'  => 'linkedin.com/in/muhamad-isnaini',
             'profile_website'   => 'www.saputra.site.je',
             'profile_photo'     => 'images/profile-photo.png',
         ]);
