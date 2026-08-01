@@ -52,6 +52,10 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         // Dashboard
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
+        // Admin Account Profile
+        Route::get('/profile', [\App\Http\Controllers\Admin\AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [\App\Http\Controllers\Admin\AdminProfileController::class, 'update'])->name('profile.update');
+
         // Site Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');

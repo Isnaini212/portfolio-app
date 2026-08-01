@@ -90,20 +90,48 @@ class SettingController extends Controller
         $currentPhoto = Setting::get('profile_photo', 'images/profile-photo.png');
 
         if ($request->boolean('remove_profile_photo')) {
-            // Remove custom uploaded photo from storage disk
-            if ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
+            // Remove custom uploaded photo from disk
+            if ($currentPhoto && str_starts_with($currentPhoto, 'uploads/')) {
+                $oldFile = public_path($currentPhoto);
+                if (file_exists($oldFile)) {
+                    @unlink($oldFile);
+                }
+            } elseif ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($currentPhoto);
             }
             Setting::set('profile_photo', 'images/profile-photo.png');
             unset($validated['profile_photo']);
         } elseif ($request->hasFile('profile_photo_file')) {
             // Delete old uploaded image if exists
-            if ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
+            if ($currentPhoto && str_starts_with($currentPhoto, 'uploads/')) {
+                $oldFile = public_path($currentPhoto);
+                if (file_exists($oldFile)) {
+                    @unlink($oldFile);
+                }
+            } elseif ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($currentPhoto);
             }
-            $path = $request->file('profile_photo_file')->store('profile', 'public');
+
+            $file = $request->file('profile_photo_file');
+            $filename = time() . '_' . \Illuminate\Support\Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $uploadDir = public_path('uploads/profile');
+
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $file->move($uploadDir, $filename);
+            $path = 'uploads/profile/' . $filename;
+
             Setting::set('profile_photo', $path);
             unset($validated['profile_photo']);
+        } else {
+            // If no new file uploaded and remove not checked
+            if (isset($validated['profile_photo'])) {
+                if (empty($validated['profile_photo'])) {
+                    unset($validated['profile_photo']);
+                }
+            }
         }
 
         unset($validated['profile_photo_file'], $validated['remove_profile_photo']);

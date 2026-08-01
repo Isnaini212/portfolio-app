@@ -142,6 +142,8 @@
                              'icon' => 'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a2 2 0 012-2z'],
                         ],
                         'System' => [
+                            ['route' => 'admin.profile.edit',    'label' => 'Admin Account', 'match' => 'admin.profile.*',
+                             'icon' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
                             ['route' => 'admin.settings.index',   'label' => 'Site Settings', 'match' => 'admin.settings.*',
                              'icon' => 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'],
                         ],
@@ -190,7 +192,12 @@
 
             {{-- User footer --}}
             <div style="padding:12px 14px;border-top:1px solid #27272a;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                <a href="{{ route('admin.profile.edit') }}"
+                   style="display:flex;align-items:center;gap:10px;margin-bottom:10px;text-decoration:none;padding:6px;border-radius:8px;transition:background 0.15s;cursor:pointer;"
+                   onmouseover="this.style.background='rgba(255,255,255,0.05)';"
+                   onmouseout="this.style.background='transparent';"
+                   title="Kelola Akun Admin"
+                >
                     <div style="width:30px;height:30px;border-radius:50%;background:#1e1b4b;border:1px solid #3730a3;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#a5b4fc;flex-shrink:0;">
                         {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                     </div>
@@ -198,7 +205,7 @@
                         <div style="font-size:13px;font-weight:500;color:#e4e4e7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ auth()->user()->name }}</div>
                         <div style="font-size:11px;color:#52525b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ auth()->user()->email }}</div>
                     </div>
-                </div>
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
