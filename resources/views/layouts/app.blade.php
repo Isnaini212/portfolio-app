@@ -139,6 +139,10 @@
                            class="{{ request()->routeIs('home') ? 'nav-link-active' : 'nav-link' }} pb-1">
                             Home
                         </a>
+                        <a href="{{ route('home') }}#about"
+                           class="nav-link pb-1">
+                            Data Diri
+                        </a>
                         <a href="{{ route('home') }}#projects"
                            class="nav-link pb-1">
                             Projects
@@ -201,6 +205,14 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
                         </svg>
                         Home
+                    </a>
+                    <a href="{{ route('home') }}#about"
+                       @click="open = false"
+                       class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/60 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Data Diri
                     </a>
                     <a href="{{ route('home') }}#projects"
                        @click="open = false"

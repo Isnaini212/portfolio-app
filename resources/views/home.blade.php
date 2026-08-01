@@ -45,14 +45,14 @@
             <div class="relative z-10" id="hero-headline">
                 {{-- Line 1: left aligned --}}
                 <div class="overflow-hidden mb-[-0.08em]">
-                    <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] text-zinc-100 uppercase select-none">
+                    <p class="text-[clamp(2.25rem,5.5vw,4.75rem)] font-black leading-none tracking-[-0.04em] text-zinc-100 uppercase select-none">
                         {{ $settings['hero_headline_1'] ?? 'INFORMATION' }}
                     </p>
                 </div>
 
                 {{-- Line 2: right aligned --}}
                 <div class="overflow-hidden mb-[-0.04em]">
-                    <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right"
+                    <p class="text-[clamp(2.25rem,5.5vw,4.75rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right"
                        style="background: linear-gradient(135deg, #e4e4e7 0%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                         {{ $settings['hero_headline_2'] ?? 'SYSTEMS' }}
                     </p>
@@ -60,7 +60,7 @@
 
                 {{-- Line 3: right aligned gradient --}}
                 <div class="overflow-hidden">
-                    <p class="text-[clamp(3.5rem,10vw,9rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right gradient-text">
+                    <p class="text-[clamp(2.25rem,5.5vw,4.75rem)] font-black leading-none tracking-[-0.04em] uppercase select-none text-right gradient-text">
                         {{ $settings['hero_headline_3'] ?? '& DEVLOG' }}
                     </p>
                 </div>
@@ -95,7 +95,7 @@
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </a>
-                        <a href="mailto:{{ $settings['hero_email'] ?? 'hello@example.com' }}"
+                        <a href="mailto:{{ $settings['hero_email'] ?? 'muhamadisnaini121@gmail.com' }}"
                            id="social-email"
                            aria-label="Send an email"
                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-800/80 border border-zinc-700/50 text-zinc-400 hover:text-white hover:border-pink-500/60 hover:bg-pink-500/10 transition-all duration-200">
@@ -103,7 +103,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                         </a>
-                        <span class="ml-1 text-xs text-zinc-600 font-medium">{{ $settings['hero_email'] ?? 'hello@example.com' }}</span>
+                        <span class="ml-1 text-xs text-zinc-600 font-medium">{{ $settings['hero_email'] ?? 'muhamadisnaini121@gmail.com' }}</span>
                     </div>
                 </div>
 
@@ -139,37 +139,595 @@
             </div>
 
             {{-- ── Scroll indicator ────────────────────────────────── --}}
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-1.5 text-zinc-700" aria-hidden="true">
-                <span class="text-[10px] font-semibold uppercase tracking-[0.25em]">Scroll</span>
-                <div class="w-px h-8 bg-gradient-to-b from-zinc-600 to-transparent animate-pulse"></div>
-            </div>
+            <a href="#about"
+               onclick="event.preventDefault(); document.getElementById('about').scrollIntoView({ behavior: 'smooth' });"
+               class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-zinc-500 hover:text-indigo-400 transition-colors duration-300 group cursor-pointer z-20"
+               aria-label="Scroll down to Data Diri section">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.25em] group-hover:tracking-[0.35em] transition-all duration-300">Scroll Down</span>
+                <div class="w-5 h-9 rounded-full border-2 border-zinc-700/80 group-hover:border-indigo-500/60 flex justify-center p-1 transition-colors duration-300 bg-zinc-950/40 backdrop-blur-sm">
+                    <div class="w-1.5 h-2 rounded-full bg-indigo-400 animate-bounce"></div>
+                </div>
+            </a>
         </div>
     </section>
 
     {{-- ========================================================== --}}
-    {{-- CATEGORY STATS STRIP                                        --}}
+    {{-- SECTION TRANSITION DIVIDER & ANIMATED GLOW BEAMS           --}}
     {{-- ========================================================== --}}
-    <section class="border-y border-zinc-800/60 bg-zinc-900/30">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
-                @foreach($categories as $category)
-                    <div class="flex items-center gap-3 group">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/20 transition-colors duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a2 2 0 012-2z"/>
-                            </svg>
+    <div class="relative w-full h-20 bg-gradient-to-b from-zinc-950 via-zinc-950/90 to-zinc-950 flex flex-col items-center justify-center overflow-hidden pointer-events-none z-10" aria-hidden="true">
+        {{-- Animated Moving Laser Stream --}}
+        <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent relative">
+            <div class="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400 to-transparent blur-[1px] animate-[beamSweep_4s_ease-in-out_infinite]"></div>
+            <div class="absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-pink-400 to-transparent blur-[2px] animate-[beamSweep_6s_ease-in-out_infinite_reverse]"></div>
+        </div>
+        <style>
+            @keyframes beamSweep {
+                0% { left: -30%; }
+                50% { left: 100%; }
+                100% { left: -30%; }
+            }
+            @keyframes laserScan {
+                0% { top: -100%; }
+                100% { top: 200%; }
+            }
+        </style>
+    </div>
+
+    {{-- ========================================================== --}}
+    {{-- DATA DIRI / PROFILE IDENTITY SLIDER SECTION               --}}
+    {{-- ========================================================== --}}
+    <section id="about" class="py-20 lg:py-28 relative overflow-hidden bg-zinc-950/80 border-b border-zinc-800/60">
+
+        {{-- Background Ambient Particle Glows --}}
+        <div class="absolute inset-0 pointer-events-none select-none z-0" aria-hidden="true">
+            <div class="absolute top-1/2 -left-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] animate-pulse"></div>
+            <div class="absolute -bottom-20 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
+            <div class="absolute top-10 right-10 w-80 h-80 bg-pink-600/5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            {{-- Slider Alpine Component with Auto-play, Touch Swipe, Progress Bar, & Scroll Reveal --}}
+            <div
+                x-data="{
+                    visible: false,
+                    slide: 0,
+                    total: 3,
+                    direction: 'next',
+                    copied: false,
+                    progress: 0,
+                    progressInterval: null,
+                    isPlaying: true,
+                    touchStartX: 0,
+                    touchEndX: 0,
+                    handleTouchStart(e) {
+                        this.touchStartX = e.changedTouches[0].screenX;
+                    },
+                    handleTouchEnd(e) {
+                        this.touchEndX = e.changedTouches[0].screenX;
+                        if (this.touchStartX - this.touchEndX > 40) this.next();
+                        if (this.touchEndX - this.touchStartX > 40) this.prev();
+                    },
+                    next() {
+                        this.direction = 'next';
+                        this.slide = (this.slide + 1) % this.total;
+                        this.resetTimer();
+                    },
+                    prev() {
+                        this.direction = 'prev';
+                        this.slide = (this.slide - 1 + this.total) % this.total;
+                        this.resetTimer();
+                    },
+                    goTo(i) {
+                        this.direction = i > this.slide ? 'next' : 'prev';
+                        this.slide = i;
+                        this.resetTimer();
+                    },
+                    startTimer() {
+                        if (!this.isPlaying) return;
+                        clearInterval(this.progressInterval);
+                        this.progressInterval = setInterval(() => {
+                            if (this.progress < 100) {
+                                this.progress += 2;
+                            } else {
+                                this.progress = 0;
+                                this.next();
+                            }
+                        }, 100);
+                    },
+                    resetTimer() {
+                        this.progress = 0;
+                        this.startTimer();
+                    },
+                    pauseTimer() {
+                        clearInterval(this.progressInterval);
+                    },
+                    resumeTimer() {
+                        this.startTimer();
+                    },
+                    togglePlay() {
+                        this.isPlaying = !this.isPlaying;
+                        if (this.isPlaying) this.startTimer();
+                        else this.pauseTimer();
+                    },
+                    copyEmail(email) {
+                        navigator.clipboard.writeText(email);
+                        this.copied = true;
+                        setTimeout(() => this.copied = false, 2500);
+                    }
+                }"
+                x-init="
+                    const obs = new IntersectionObserver((entries) => {
+                        entries.forEach(e => {
+                            if (e.isIntersecting) {
+                                visible = true;
+                                startTimer();
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    obs.observe($el);
+                "
+                @mouseenter="pauseTimer()"
+                @mouseleave="resumeTimer()"
+                :class="visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-16 scale-[0.96]'"
+                @keydown.left.window="prev()"
+                @keydown.right.window="next()"
+                class="space-y-8 transition-all duration-800 cubic-bezier(0.16, 1, 0.3, 1)"
+            >
+
+                {{-- Header & Tab Navigation Row --}}
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-3 shadow-inner">
+                            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+                            Data Diri & Profil
                         </div>
-                        <div>
-                            <p class="text-sm font-semibold text-zinc-200">{{ $category->name }}</p>
-                            <p class="text-xs text-zinc-500">
-                                {{ $category->projects_count }} {{ Str::plural('project', $category->projects_count) }}
-                                &middot;
-                                {{ $category->learning_logs_count }} {{ Str::plural('log', $category->learning_logs_count) }}
-                            </p>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                            Personal Profile & Identity Banner
+                        </h2>
+                        <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-xl">
+                            Geser atau klik tombol navigator untuk melihat detail data diri, pendidikan, dan fokus keahlian.
+                        </p>
+                    </div>
+
+                    {{-- Navigation Controls: Tab Pills + Arrow Buttons + Play/Pause --}}
+                    <div class="flex items-center gap-4 flex-wrap">
+
+                        {{-- Tab Pills --}}
+                        <div class="inline-flex items-center p-1 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-medium backdrop-blur-md">
+                            <button
+                                @click="goTo(0)"
+                                :class="slide === 0 ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-zinc-400 hover:text-zinc-200'"
+                                class="px-3.5 py-1.5 rounded-lg transition-all duration-300 font-semibold"
+                            >
+                                01. Banner Identitas
+                            </button>
+                            <button
+                                @click="goTo(1)"
+                                :class="slide === 1 ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-zinc-400 hover:text-zinc-200'"
+                                class="px-3.5 py-1.5 rounded-lg transition-all duration-300 font-semibold"
+                            >
+                                02. Akademik & Fokus
+                            </button>
+                            <button
+                                @click="goTo(2)"
+                                :class="slide === 2 ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-zinc-400 hover:text-zinc-200'"
+                                class="px-3.5 py-1.5 rounded-lg transition-all duration-300 font-semibold"
+                            >
+                                03. Tech Stack
+                            </button>
+                        </div>
+
+                        {{-- Prev / Next Arrows + Auto-Play Toggle --}}
+                        <div class="flex items-center gap-2">
+                            <button
+                                @click="togglePlay()"
+                                :title="isPlaying ? 'Pause Auto-slide' : 'Play Auto-slide'"
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700/60 text-zinc-400 hover:text-white hover:border-indigo-500/60 flex items-center justify-center transition-all duration-200 shadow-md"
+                            >
+                                <svg x-show="isPlaying" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                                </svg>
+                                <svg x-show="!isPlaying" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </button>
+
+                            <button
+                                @click="prev()"
+                                aria-label="Slide Sebelumnya"
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700/60 text-zinc-300 hover:text-white hover:border-indigo-500/60 hover:bg-indigo-500/10 flex items-center justify-center transition-all duration-200 group active:scale-95 shadow-md"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button
+                                @click="next()"
+                                aria-label="Slide Selanjutnya"
+                                class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700/60 text-zinc-300 hover:text-white hover:border-indigo-500/60 hover:bg-indigo-500/10 flex items-center justify-center transition-all duration-200 group active:scale-95 shadow-md"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                {{-- Slider Container Box with Top Progress Bar & Touch Swipe Support --}}
+                <div
+                    @touchstart="handleTouchStart($event)"
+                    @touchend="handleTouchEnd($event)"
+                    class="relative min-h-[460px] sm:min-h-[420px] rounded-3xl bg-zinc-900/90 border border-zinc-800/90 shadow-2xl overflow-hidden backdrop-blur-xl group/card"
+                >
+
+                    {{-- Live Top Auto-slide Progress Bar --}}
+                    <div class="w-full h-1 bg-zinc-800/60 relative overflow-hidden z-30">
+                        <div class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-100 ease-linear shadow-[0_0_12px_rgba(99,102,241,0.9)]"
+                             :style="`width: ${progress}%`"></div>
+                    </div>
+
+                    {{-- ── SLIDE 0: Profile Identity Banner (Canva Mockup Design Adaptation) ── --}}
+                    <div
+                        x-show="slide === 0"
+                        x-transition:enter="transition ease-out duration-400 transform"
+                        x-transition:enter-start="opacity-0 translate-x-10"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-200 transform absolute inset-0"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-10"
+                        class="w-full h-full"
+                    >
+                        <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[420px]">
+
+                            {{-- Left Column: Main Identity Info & Contacts --}}
+                            <div class="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between space-y-6 relative z-10 bg-gradient-to-r from-zinc-950 via-zinc-900/95 to-transparent">
+
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3">
+                                        <span class="px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-mono font-semibold">
+                                            ID BADGE #2026
+                                        </span>
+                                        <span class="text-xs text-zinc-500 font-medium">Tangerang, Banten, ID</span>
+                                    </div>
+
+                                    {{-- Full Name --}}
+                                    <h3 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight leading-none font-sans">
+                                        {{ $settings['profile_name'] ?? 'MUHAMAD ISNAINI SAPUTRA' }}
+                                    </h3>
+
+                                    {{-- Subtitle / Major --}}
+                                    <p class="text-sm sm:text-lg font-bold text-zinc-300 uppercase tracking-widest">
+                                        {{ $settings['profile_role'] ?? 'MAHASISWA SISTEM INFORMASI' }}
+                                    </p>
+
+                                    {{-- Sleek horizontal divider line --}}
+                                    <div class="w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-transparent rounded-full my-4 opacity-80"></div>
+                                </div>
+
+                                {{-- Contact Items Grid --}}
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                                    {{-- Phone --}}
+                                    <div class="flex items-center gap-3.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/80 hover:border-indigo-500/40 transition-colors group">
+                                        <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Telepon / WA</p>
+                                            <p class="font-mono font-medium text-zinc-200 truncate">{{ $settings['profile_phone'] ?? '081282250402' }}</p>
+                                        </div>
+                                    </div>
+
+                                    {{-- Location --}}
+                                    <div class="flex items-center gap-3.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/80 hover:border-emerald-500/40 transition-colors group">
+                                        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Lokasi</p>
+                                            <p class="font-semibold text-zinc-200 truncate">{{ $settings['profile_location'] ?? 'Tangerang, Banten' }}</p>
+                                        </div>
+                                    </div>
+
+                                    {{-- Email --}}
+                                    <div class="flex items-center gap-3.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/80 hover:border-pink-500/40 transition-colors group">
+                                        <div class="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 group-hover:scale-105 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Email Utama</p>
+                                            <p class="font-mono text-xs text-zinc-200 truncate">{{ $settings['profile_email'] ?? 'muhamadisnaini121@gmail.com' }}</p>
+                                        </div>
+                                    </div>
+
+                                    {{-- GitHub --}}
+                                    <a href="https://{{ str_replace(['https://', 'http://'], '', $settings['profile_github'] ?? 'github.com/Isnaini212') }}" target="_blank" rel="noopener" class="flex items-center gap-3.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/80 hover:border-indigo-500/40 transition-colors group">
+                                        <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <p class="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">GitHub Profile</p>
+                                            <p class="font-mono text-xs text-indigo-300 font-medium truncate">{{ $settings['profile_github'] ?? 'github.com/Isnaini212' }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                {{-- Quick Actions Row --}}
+                                <div class="pt-2 flex items-center gap-3 flex-wrap">
+                                    <a
+                                        href="https://wa.me/62{{ ltrim($settings['profile_phone'] ?? '081282250402', '0') }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all shadow-lg shadow-emerald-600/20"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.155 4.218 4.298-1.127z"/>
+                                        </svg>
+                                        Hubungi via WhatsApp
+                                    </a>
+
+                                    <button
+                                        @click="copyEmail('{{ $settings['profile_email'] ?? 'muhamadisnaini121@gmail.com' }}')"
+                                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-xs border border-zinc-700 transition-all"
+                                    >
+                                        <svg x-show="!copied" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        </svg>
+                                        <svg x-show="copied" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        <span x-text="copied ? 'Email Tersalin!' : 'Salin Email'"></span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            {{-- Right Column: Photo with 3D Tilt Mouse Parallax & Laser Scanner Beam --}}
+                            <div
+                                x-data="{ tiltX: 0, tiltY: 0 }"
+                                @mousemove="
+                                    const rect = $el.getBoundingClientRect();
+                                    const x = $event.clientX - rect.left - (rect.width / 2);
+                                    const y = $event.clientY - rect.top - (rect.height / 2);
+                                    tiltX = (y / rect.height) * -10;
+                                    tiltY = (x / rect.width) * 10;
+                                "
+                                @mouseleave="tiltX = 0; tiltY = 0;"
+                                :style="`transform: perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg); transition: transform 0.15s ease-out;`"
+                                class="lg:col-span-5 relative min-h-[320px] lg:min-h-[420px] bg-zinc-950 flex items-center justify-center overflow-hidden group/tilt"
+                            >
+                                {{-- Laser Scanner Beam Overlay --}}
+                                <div class="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover/tilt:opacity-100 animate-[laserScan_3.5s_linear_infinite] z-30 pointer-events-none shadow-[0_0_15px_#38bdf8]"></div>
+
+                                {{-- Polygon dark overlay angle inspired by the Canva design --}}
+                                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent z-10"></div>
+                                <div class="absolute inset-0 bg-indigo-950/20 pointer-events-none mix-blend-overlay"></div>
+
+                                {{-- Profile Image --}}
+                                @php
+                                    $photoPath = $settings['profile_photo'] ?? 'images/profile-photo.png';
+                                    if (\Illuminate\Support\Str::startsWith($photoPath, ['http://', 'https://'])) {
+                                        $profilePhotoUrl = $photoPath;
+                                    } elseif (\Illuminate\Support\Str::startsWith($photoPath, ['images/', 'uploads/'])) {
+                                        $profilePhotoUrl = asset($photoPath);
+                                    } else {
+                                        $profilePhotoUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($photoPath);
+                                    }
+                                @endphp
+
+                                <img
+                                    src="{{ $profilePhotoUrl }}"
+                                    alt="{{ $settings['profile_name'] ?? 'Muhamad Isnaini Saputra' }}"
+                                    class="w-full h-full object-cover object-top filter grayscale contrast-125 group-hover/tilt:grayscale-0 group-hover/tilt:scale-105 transition-all duration-700"
+                                />
+
+                                {{-- Subtle diagonal accent divider matching Canva --}}
+                                <div class="hidden lg:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none"></div>
+
+                                {{-- Corner Badge --}}
+                                <div class="absolute bottom-4 right-4 z-20 px-3 py-1.5 rounded-lg bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-mono text-zinc-300 backdrop-blur-md flex items-center gap-2 shadow-lg group-hover/tilt:border-cyan-500/50 transition-colors">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                    Mahasiswa Aktif SI
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
-                @endforeach
+
+                    {{-- ── SLIDE 1: Academic & Focus Detail ── --}}
+                    <div
+                        x-show="slide === 1"
+                        x-transition:enter="transition ease-out duration-400 transform"
+                        x-transition:enter-start="opacity-0 translate-x-10"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-200 transform absolute inset-0"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-10"
+                        class="w-full h-full p-6 sm:p-10 flex flex-col justify-between space-y-8"
+                    >
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-purple-300 text-xs font-mono font-semibold">
+                                    AKADEMIK & STUDI
+                                </span>
+                                <span class="text-xs text-zinc-500 font-mono">Tangerang, Banten</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                Mahasiswa Sistem Informasi
+                            </h3>
+                            <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
+                                Berfokus pada perancangan sistem informasi enterprise, arsitektur basis data relational, serta pengembangan aplikasi berbasis web yang scalable dan efisien.
+                            </p>
+                        </div>
+
+                        {{-- 3 Pillars Grid --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-indigo-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-sm font-bold text-zinc-200 mb-1">Web Development</h4>
+                                <p class="text-xs text-zinc-400 leading-relaxed">Spesialisasi Laravel, Blade, Alpine.js & Livewire untuk membangun aplikasi web modern.</p>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-purple-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-sm font-bold text-zinc-200 mb-1">Database & Systems</h4>
+                                <p class="text-xs text-zinc-400 leading-relaxed">Perancangan skema relasional MySQL, optimasi query, ERD, dan struktur data aplikasi.</p>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-emerald-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-sm font-bold text-zinc-200 mb-1">Public DevLog</h4>
+                                <p class="text-xs text-zinc-400 leading-relaxed">Mendokumentasikan setiap eksperimen coding & progres belajar secara publik dan konsisten.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-zinc-800/60 text-xs text-zinc-500 font-mono">
+                            <span>Status: Mahasiswa Aktif SI</span>
+                            <span>Lokasi: Tangerang, Banten</span>
+                        </div>
+                    </div>
+
+                    {{-- ── SLIDE 2: Tech Stack & Skill Highlights ── --}}
+                    <div
+                        x-show="slide === 2"
+                        x-transition:enter="transition ease-out duration-400 transform"
+                        x-transition:enter-start="opacity-0 translate-x-10"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-200 transform absolute inset-0"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-10"
+                        class="w-full h-full p-6 sm:p-10 flex flex-col justify-between space-y-6"
+                    >
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-mono font-semibold">
+                                    SKILLS & TOOLSTACK
+                                </span>
+                                <span class="text-xs text-zinc-500 font-mono">Teknologi Handal</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                Tech Stack & Alat Pengembangan
+                            </h3>
+                            <p class="text-zinc-400 text-sm mt-1">
+                                Perangkat lunak, framework, dan teknologi yang biasa digunakan dalam proyek harian.
+                            </p>
+                        </div>
+
+                        {{-- Stack Groups --}}
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs font-semibold text-indigo-400 uppercase tracking-wider mb-2">Backend & Database</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-indigo-400"></span> PHP 8+
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-red-400"></span> Laravel Framework
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-sky-400"></span> MySQL Database
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-purple-400"></span> RESTful APIs
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-xs font-semibold text-pink-400 uppercase tracking-wider mb-2">Frontend & Interface</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-teal-400"></span> Tailwind CSS
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript ES6+
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Alpine.js
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Laravel Livewire
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-orange-400"></span> Blade Views
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-2">Tools & Environment</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        Git & GitHub
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        VS Code
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        Laragon Dev Environment
+                                    </span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs font-medium flex items-center gap-2">
+                                        Vite Bundler
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-zinc-800/60 text-xs text-zinc-500 font-mono">
+                            <span>Kesiapan Project: Active</span>
+                            <span>Continuous Learning & Deployment</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                {{-- Bottom Slider Indicators & Quick Nav Bar --}}
+                <div class="flex items-center justify-between px-2 text-xs text-zinc-500 font-mono">
+                    <div class="flex items-center gap-2">
+                        <template x-for="i in total" :key="i">
+                            <button
+                                @click="goTo(i - 1)"
+                                :class="slide === (i - 1) ? 'w-8 bg-indigo-500' : 'w-2 bg-zinc-700 hover:bg-zinc-500'"
+                                class="h-2 rounded-full transition-all duration-300"
+                                :aria-label="'Ke slide ' + i"
+                            ></button>
+                        </template>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <span class="text-zinc-400 font-semibold" x-text="'0' + (slide + 1) + ' / 03'"></span>
+                        <span class="hidden sm:inline text-zinc-600">| Gunakan panah keyboard &larr; &rarr; untuk navigasi</span>
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </section>
 

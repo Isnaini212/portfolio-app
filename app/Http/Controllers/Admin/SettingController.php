@@ -23,7 +23,15 @@ class SettingController extends Controller
             'hero_headline_2'   => Setting::get('hero_headline_2', 'SYSTEMS'),
             'hero_headline_3'   => Setting::get('hero_headline_3', '& DEVLOG'),
             'hero_bio'          => Setting::get('hero_bio', 'Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi web modern (Laravel, Livewire, Tailwind CSS) dan manajemen basis data. Mendokumentasikan setiap proses belajar di sini.'),
-            'hero_email'        => Setting::get('hero_email', 'isnaini@gmail.com'),
+            'hero_email'        => Setting::get('hero_email', 'muhamadisnaini121@gmail.com'),
+            'profile_name'      => Setting::get('profile_name', 'MUHAMAD ISNAINI SAPUTRA'),
+            'profile_role'      => Setting::get('profile_role', 'MAHASISWA SISTEM INFORMASI'),
+            'profile_phone'     => Setting::get('profile_phone', '081282250402'),
+            'profile_location'  => Setting::get('profile_location', 'Tangerang, Banten'),
+            'profile_email'     => Setting::get('profile_email', 'muhamadisnaini121@gmail.com'),
+            'profile_github'    => Setting::get('profile_github', 'github.com/Isnaini212'),
+            'profile_website'   => Setting::get('profile_website', 'www.saputra.site.je'),
+            'profile_photo'     => Setting::get('profile_photo', 'images/profile-photo.png'),
         ];
 
         return view('admin.settings.index', compact('settings'));
@@ -35,21 +43,52 @@ class SettingController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'preloader_text'    => ['required', 'string', 'max:150'],
-            'hero_status_badge' => ['required', 'string', 'max:100'],
-            'hero_sub_badge'    => ['required', 'string', 'max:150'],
-            'hero_headline_1'   => ['required', 'string', 'max:100'],
-            'hero_headline_2'   => ['required', 'string', 'max:100'],
-            'hero_headline_3'   => ['required', 'string', 'max:100'],
-            'hero_bio'          => ['required', 'string', 'max:500'],
-            'hero_email'        => ['required', 'email', 'max:150'],
+            'preloader_text'     => ['required', 'string', 'max:150'],
+            'hero_status_badge'  => ['required', 'string', 'max:100'],
+            'hero_sub_badge'     => ['required', 'string', 'max:150'],
+            'hero_headline_1'    => ['required', 'string', 'max:100'],
+            'hero_headline_2'    => ['required', 'string', 'max:100'],
+            'hero_headline_3'    => ['required', 'string', 'max:100'],
+            'hero_bio'           => ['required', 'string', 'max:500'],
+            'hero_email'         => ['required', 'email', 'max:150'],
+            'profile_name'       => ['nullable', 'string', 'max:150'],
+            'profile_role'       => ['nullable', 'string', 'max:150'],
+            'profile_phone'      => ['nullable', 'string', 'max:50'],
+            'profile_location'   => ['nullable', 'string', 'max:150'],
+            'profile_email'      => ['nullable', 'email', 'max:150'],
+            'profile_github'     => ['nullable', 'string', 'max:150'],
+            'profile_website'    => ['nullable', 'string', 'max:150'],
+            'profile_photo'      => ['nullable', 'string', 'max:255'],
+            'profile_photo_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
         ]);
+
+        // Handle profile photo CRUD operations
+        $currentPhoto = Setting::get('profile_photo', 'images/profile-photo.png');
+
+        if ($request->boolean('remove_profile_photo')) {
+            // Remove custom uploaded photo from storage disk
+            if ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($currentPhoto);
+            }
+            Setting::set('profile_photo', 'images/profile-photo.png');
+            unset($validated['profile_photo']);
+        } elseif ($request->hasFile('profile_photo_file')) {
+            // Delete old uploaded image if exists
+            if ($currentPhoto && !str_starts_with($currentPhoto, 'images/')) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($currentPhoto);
+            }
+            $path = $request->file('profile_photo_file')->store('profile', 'public');
+            Setting::set('profile_photo', $path);
+            unset($validated['profile_photo']);
+        }
+
+        unset($validated['profile_photo_file'], $validated['remove_profile_photo']);
 
         foreach ($validated as $key => $value) {
             Setting::set($key, $value);
         }
 
         return redirect()->route('admin.settings.index')
-            ->with('success', 'Hero & site settings updated successfully.');
+            ->with('success', 'Pengaturan situs & foto profil berhasil diperbarui.');
     }
 }
