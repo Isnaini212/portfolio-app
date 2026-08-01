@@ -122,15 +122,12 @@
                 <div class="flex items-center justify-between h-16">
 
                     {{-- Brand Logo --}}
-                    <a href="{{ route('home') }}" class="flex items-center gap-2.5 group">
+                    <a href="{{ route('home') }}" class="flex items-center gap-2.5 group" aria-label="Home">
                         <div class="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center group-hover:bg-indigo-600/30 group-hover:border-indigo-500/50 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                             </svg>
                         </div>
-                        <span class="font-bold text-white tracking-tight text-base group-hover:text-indigo-300 transition-colors">
-                            Dev<span class="text-indigo-400">Portfolio</span>
-                        </span>
                     </a>
 
                     {{-- Desktop Nav --}}
@@ -162,8 +159,6 @@
                                 </svg>
                                 Dashboard
                             </a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn-ghost" id="nav-signin">Sign In</a>
                         @endauth
                     </div>
 
@@ -231,17 +226,13 @@
                         Progress Log
                     </a>
 
-                    <div class="pt-2 mt-1 border-t border-zinc-800">
-                        @auth
+                    @auth
+                        <div class="pt-2 mt-1 border-t border-zinc-800">
                             <a href="{{ route('dashboard') }}" @click="open = false" class="btn-ghost w-full justify-center mt-2">
                                 Dashboard
                             </a>
-                        @else
-                            <a href="{{ route('login') }}" @click="open = false" class="btn-ghost w-full justify-center mt-2">
-                                Sign In
-                            </a>
-                        @endauth
-                    </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </nav>

@@ -122,8 +122,7 @@
                     DV
                 </div>
                 <div>
-                    <div style="font-size:13px;font-weight:600;color:#f4f4f5;line-height:1.2;">DevPortfolio</div>
-                    <div style="font-size:10px;color:#52525b;font-weight:500;">Admin Panel</div>
+                    <div style="font-size:12px;font-weight:600;color:#f4f4f5;line-height:1.2;">Admin Panel</div>
                 </div>
             </div>
 
