@@ -228,7 +228,7 @@
                         clearInterval(this.progressInterval);
                         this.progressInterval = setInterval(() => {
                             if (this.progress < 100) {
-                                this.progress += 2;
+                                this.progress += 0.8;
                             } else {
                                 this.progress = 0;
                                 this.next();
@@ -269,6 +269,8 @@
                 "
                 @mouseenter="pauseTimer()"
                 @mouseleave="resumeTimer()"
+                @touchstart="pauseTimer()"
+                @touchend="resumeTimer()"
                 :class="visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-16 scale-[0.96]'"
                 @keydown.left.window="prev()"
                 @keydown.right.window="next()"
