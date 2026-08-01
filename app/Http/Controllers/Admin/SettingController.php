@@ -30,6 +30,7 @@ class SettingController extends Controller
             'profile_location'  => Setting::get('profile_location', 'Tangerang, Banten'),
             'profile_email'     => Setting::get('profile_email', 'muhamadisnaini121@gmail.com'),
             'profile_github'    => Setting::get('profile_github', 'github.com/Isnaini212'),
+            'profile_linkedin'  => Setting::get('profile_linkedin', 'linkedin.com/in/muhamad-isnaini'),
             'profile_website'   => Setting::get('profile_website', 'www.saputra.site.je'),
             'profile_photo'     => Setting::get('profile_photo', 'images/profile-photo.png'),
         ];
@@ -59,6 +60,7 @@ class SettingController extends Controller
             'profile_location'   => ['nullable', 'string', 'max:150'],
             'profile_email'      => ['nullable', 'email', 'max:150'],
             'profile_github'     => ['nullable', 'string', 'max:150'],
+            'profile_linkedin'   => ['nullable', 'string', 'max:150'],
             'profile_website'    => ['nullable', 'string', 'max:150'],
             'profile_photo'      => ['nullable', 'string', 'max:255'],
             'profile_photo_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],

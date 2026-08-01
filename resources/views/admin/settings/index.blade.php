@@ -189,6 +189,16 @@
                                style="{{ $inputStyle }}">
                     </div>
 
+                    {{-- Profile LinkedIn --}}
+                    <div style="{{ $groupStyle }}">
+                        <label for="profile_linkedin" style="{{ $labelStyle }}">URL / Username LinkedIn</label>
+                        <input type="text" id="profile_linkedin" name="profile_linkedin"
+                               value="{{ old('profile_linkedin', $settings['profile_linkedin'] ?? '') }}"
+                               placeholder="linkedin.com/in/muhamad-isnaini"
+                               class="admin-input"
+                               style="{{ $inputStyle }}">
+                    </div>
+
                     {{-- Profile Website --}}
                     <div style="{{ $groupStyle }}">
                         <label for="profile_website" style="{{ $labelStyle }}">URL Website / Portfolio</label>
