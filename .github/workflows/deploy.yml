@@ -49,12 +49,16 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
+          timeout: 300000
           server-dir: ./htdocs/
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/tests/**
+            **/test/**
+            **/docs/**
             .env
             README.md
             **/public/storage/**
+            **/public/uploads/**
